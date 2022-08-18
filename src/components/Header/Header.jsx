@@ -1,12 +1,12 @@
 import {useState} from "react";
 
 import {Button, Autocomplete, TextField} from "@mui/material"
-import {TYPE_OBJECT} from "../../constants";
+import {CAMPUS, TYPE_OBJECT} from "../../constants";
 import {FormObject} from "../Forms/FormObject";
 
 import styles from "./Header.module.scss";
-import { FormRole } from "../Forms/FormRole";
-import { FormTypeObject } from "../Forms/FormTypeObject/FormTypeObject";
+import {FormRole} from "../Forms/FormRole";
+import {FormTypeObject} from "../Forms/FormTypeObject/FormTypeObject";
 
 export const Header = () => {
   const [openObjectForm, setOpenObjectForm] = useState(false)
@@ -43,34 +43,37 @@ export const Header = () => {
             <div className={
               styles.filter__campus
             }>
-              <TextField label="Введите номер кампуса"
-                sx={
-                  {width: 300}
-                }
-                variant="outlined"/>
-            </div>
-
-            <div className={
-              styles.Buttonfilter__type
-            }>
               <Autocomplete disablePortal
-                options={TYPE_OBJECT}
+                options={CAMPUS}
                 sx={
                   {width: 300}
                 }
                 renderInput={
-                  (params) => <TextField {...params} label="Типы объекта "/>}
+                  (params) => <TextField {...params} label="Выбирите кампус "/>}
                 />
             </div>
-        </div>
+
+          <div className={
+            styles.Buttonfilter__type
+          }>
+            <Autocomplete disablePortal
+              options={TYPE_OBJECT}
+              sx={
+                {width: 300}
+              }
+              renderInput={
+                (params) => <TextField {...params} label="Типы объекта "/>}
+              />
+          </div>
       </div>
-    </header>
-    <FormObject isOpen={openObjectForm}
-      setIsOpen={setOpenObjectForm}/>
-    <FormRole isOpen={openRoleForm}
-      setIsOpen={setOpenRoleForm}/>
-    <FormTypeObject isOpen={openTypeObjectForm}
-      setIsOpen={setOpenTypeObjectForm}/>
-  </>
+    </div>
+  </header>
+  <FormObject isOpen={openObjectForm}
+    setIsOpen={setOpenObjectForm}/>
+  <FormRole isOpen={openRoleForm}
+    setIsOpen={setOpenRoleForm}/>
+  <FormTypeObject isOpen={openTypeObjectForm}
+    setIsOpen={setOpenTypeObjectForm}/>
+</>
   )
 }
