@@ -8,7 +8,9 @@ import {
   FormControlLabel,
   Radio,
   Button,
-  Autocomplete
+  Autocomplete,
+  FormGroup,
+  Checkbox
 } from '@mui/material';
 import {TYPE_OBJECT, TYPE_ROLE} from './../../../constants';
 
@@ -50,18 +52,12 @@ export const FormObject = ({isOpen, setIsOpen}) => {
             }
           }/>
         <FormLabel id="demo-radio-buttons-group-label">Role</FormLabel>
-        <RadioGroup aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue={
-            TYPE_ROLE[0]
-          }
-          name="radio-buttons-group">
-          {
-          TYPE_ROLE.map((role => (
-            <FormControlLabel value={role}
-              control={<Radio/>}
-              label={role}/>
-          )))
-        } </RadioGroup>
+        <FormGroup> {
+          TYPE_ROLE.map(type => (
+            <FormControlLabel control={<Checkbox/>}
+              label={type}/>
+          ))
+        } </FormGroup>
 
         <Button
           variant="contained">Создать новый объект</Button>
