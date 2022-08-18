@@ -7,7 +7,7 @@ export const FormRole = ({isOpen, setIsOpen}) => {
     <UiPopup open={isOpen}
       setOpen={setIsOpen}>
       <FormControl>
-        <TextField label="Название типа объекта" variant="outlined"/>
+        <TextField label="Название роли" variant="outlined"/>
         <TextareaAutosize aria-label="minimum height"
           minRows={3}
           placeholder="Описание"
