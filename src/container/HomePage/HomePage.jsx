@@ -4,6 +4,8 @@ import {ObjectsList} from "../../components/ObjectsList"
 import {CAMPUS_URL, OBJECTS_URL, ROLES_URL, TYPES_URL} from "../../constants"
 import {getApiResource} from "../../utils/network"
 
+import spinner from '../../asssets/images/spinner.svg'
+
 export const HomePage = () => {
   const [data, setData] = useState({types: [], campus: [], roles: []})
 
@@ -52,8 +54,14 @@ export const HomePage = () => {
         updatePage={updatePage}
         filterOption={filterOption}
         setFilterOption={setFilterOption}/>
-      <ObjectsList objects={filterObjectsData}
-        data={data}/>
+        {
+          objectsData && objectsData.length !== 0 ? (<ObjectsList objects={filterObjectsData}data={data}/>)
+          : (
+              <div className="spinner__container">
+                <img src={spinner} alt="spinner" />
+              </div>
+          )
+        }
     </div>
   )
 }

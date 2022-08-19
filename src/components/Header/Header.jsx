@@ -20,10 +20,6 @@ export const Header = ({data, objects, updatePage, filterOption, setFilterOption
   const handleOpenRoleForm = () => setOpenRoleForm(true)
   const handleOpenTypeObjectForm = () => setOpenTypeObjectForm(true)
 
-  const changeFilters = (value, type) => {
-
-  }
-
   return (
     <>
       <header className={

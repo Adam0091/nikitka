@@ -105,7 +105,7 @@ export const FormRole = ({isOpen, setIsOpen, types, updatePage}) => {
 
         <FormGroup> {
           types.map(type => (
-            <FormControlLabel control={<Checkbox/>}
+            <FormControlLabel key={type} control={<Checkbox/>}
               label={type}/>
           ))
         } </FormGroup>

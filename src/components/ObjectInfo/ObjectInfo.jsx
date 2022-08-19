@@ -1,18 +1,37 @@
 import {Stack, TextField} from '@mui/material';
 import {DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {UiPopup} from '../UI/UiPopup';
 import {LocalizationProvider} from '@mui/x-date-pickers';
 
 import styles from './ObjectInfo.module.scss';
+import { OrderList } from '../OrderList/OrderList';
+import { getApiResource } from './../../utils/network';
+import { ORDERS_URL } from '../../constants';
 
 export const ObjectInfo = ({object, data, isOpen, setIsOpen}) => {
   const [date, setDate] = useState(new Date())
+  const [orders, setOrders] = useState([]);
 
   const handleChange = (newValue) => {
+    console.log(newValue)
     setDate(newValue);
   };
+
+  const getResources = async () => {
+    const res = await getApiResource(ORDERS_URL, {
+      object_id: object.id
+    })
+
+    if(res.ok)
+      setOrders(res.orders)
+      console.log(res.orders)
+  }
+
+  useEffect(() => {
+    getResources()
+  }, [date])
 
   return (
     <UiPopup open={isOpen}
@@ -89,11 +108,12 @@ export const ObjectInfo = ({object, data, isOpen, setIsOpen}) => {
                     value={date}
                     onChange={handleChange}
                     renderInput={
-                      (params) => <TextField {...params}/>}/>
+                      (params) => <TextField {...params}/>}
+                  />
                 </Stack>
             </LocalizationProvider>
             <div className="">
-              Список броней
+              {orders.length === 0 ? "Список броней пуст" : <OrderList orders={orders}/>}
             </div>
           </div>
         </div>
