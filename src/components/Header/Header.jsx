@@ -71,6 +71,7 @@ export const Header = ({data, objects, updatePage, filterOption, setFilterOption
     setIsOpen={setOpenObjectForm} 
     campus={campus} 
     types={types} 
+    roles={roles}
     objects={objects} 
     updatePage={updatePage}
   />

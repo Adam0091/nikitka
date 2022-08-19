@@ -34,4 +34,15 @@
     row-gap: 10px;
     column-gap: 10px;
   }
+
+  &__checkboxs {
+    padding: 10px;
+
+    height: 150px;
+    width: 100%;
+    overflow-y: auto;
+
+    display: flex;
+    flex-wrap: nowrap !important;
+  }
 }

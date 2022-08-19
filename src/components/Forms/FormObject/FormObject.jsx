@@ -2,8 +2,6 @@ import {UiPopup} from './../../UI/UiPopup';
 import {
   TextField,
   TextareaAutosize,
-  FormLabel,
-  FormControl,
   FormControlLabel,
   Button,
   Autocomplete,
@@ -18,7 +16,13 @@ import { OBJECTS_URL } from '../../../constants';
 import styles from './FormObject.module.scss'
 
 
-export const FormObject = ({isOpen, setIsOpen, campus, types, updatePage}) => {
+export const FormObject = ({isOpen, setIsOpen, campus, types, roles, updatePage}) => {
+
+  const [rulesObj, setRulesObj] = useState(roles.reduce((newObj, item) => {
+    newObj[item] = false;
+    return newObj;
+  }, {}))
+
   const [objectBody, setObjectBody] = useState({
     name: '',
     images: '',
@@ -39,6 +43,13 @@ export const FormObject = ({isOpen, setIsOpen, campus, types, updatePage}) => {
   const [disableButton, setDisableButton] = useState(false)
 
   const handleCreateObject = async () => {
+    let arrRolesIndex = [];
+
+    roles.forEach((role, index) => {
+      if(rulesObj[role])
+        arrRolesIndex.push(index + 1);
+    })
+
     setDisableButton(true);
     const res = await sendData(OBJECTS_URL, {
         ...objectBody,
@@ -46,7 +57,8 @@ export const FormObject = ({isOpen, setIsOpen, campus, types, updatePage}) => {
         campus: Number(campus.indexOf(objectBody.campus) + 1),
         floor: Number(objectBody.floor),
         room: Number(objectBody.room),
-        active: true
+        active: true,
+        roles: arrRolesIndex
     })
     
     if(res.ok){
@@ -95,6 +107,8 @@ export const FormObject = ({isOpen, setIsOpen, campus, types, updatePage}) => {
   }
 
   const handleOnChangeInput = (event, type) => {
+
+    console.log(rulesObj)
     if(type === 'name') {
       setObjectBody((object)=> ({...object, name: event.target.value}))
     }
@@ -121,13 +135,26 @@ export const FormObject = ({isOpen, setIsOpen, campus, types, updatePage}) => {
     }
   }
 
+  const handleChangeCheckbox = (event, role) => {
+    const value = event.target.checked;
+    console.log(value)
+    setRulesObj(prev => ({...prev, [role]: value}))
+  }
+
   const inputAreError = () => {
+    let arrRolesIndex = [];
+
+    roles.forEach((role, index) => {
+      if(rulesObj[role])
+        arrRolesIndex.push(index);
+    })
 
     return !objectBody.name.length
         // || !objectBody.images.length
         || !objectBody.floor
         || !objectBody.room
-        || !objectBody.campus;
+        || !objectBody.campus
+        || arrRolesIndex.length === 0;
   }
 
   return (<UiPopup open={isOpen}
@@ -182,6 +209,23 @@ export const FormObject = ({isOpen, setIsOpen, campus, types, updatePage}) => {
           renderInput={(params) => <TextField {...params} error={!objectBody.type} label="Выбор типа здания"/>}
         />
       </div>
+
+      <FormGroup className={styles.form_object__checkboxs}> 
+          {
+            roles.map(role => (
+              <FormControlLabel
+                key={role} 
+                checked={rulesObj[role]}
+                onChange={(event)=> handleChangeCheckbox(event, role)}
+                name={role}
+                control={<Checkbox/>}
+                label={role}
+              />
+            ))
+          } 
+        </FormGroup>
+
+      
 
       <div className={styles.form_object__textarea}>
         <TextareaAutosize aria-label="minimum height"
