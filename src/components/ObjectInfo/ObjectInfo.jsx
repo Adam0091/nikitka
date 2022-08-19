@@ -17,72 +17,40 @@ export const ObjectInfo = ({object, data, isOpen, setIsOpen}) => {
   return (
     <UiPopup open={isOpen}
       setOpen={setIsOpen}>
-      <div className={
-        styles.object_info
-      }>
-        <div className={
-          styles.object_info__row
-        }>
-          <div className={
-            styles.object_info__column
-          }>
-            <div className={
-              styles.object_info__description
-            }>
+      <div className={styles.object_info}>
+        <div className={styles.object_info__row}>
+          <div className={styles.object_info__column}>
+            <div className={styles.object_info__description}>
               <h2>Объект</h2>
-              <div className={
-                styles.description__item
-              }>
-                <span>Название объекта:
-                </span>
-                <span>{
-                  object.name
-                }</span>
+
+              <div className={styles.description__item}>
+                <span className={styles.description__text}>Название объекта:</span>
+                <span className={styles.description__value}>{object.name}</span>
               </div>
-              <div className={
-                styles.description__item
-              }>
-                <span>Тип объекта:
-                </span>
-                <span>{
-                  data.types[object.type]?.name
-                }</span>
+
+              <div className={styles.description__item}>
+                <span className={styles.description__text}>Тип объекта:</span>
+                <span className={styles.description__value}>{data.types[object.type]?.name}</span>
               </div>
-              <div className={
-                styles.description__item
-              }>
-                <span>Кампус:
-                </span>
-                <span>{
-                  data.campus[object.campus]?.name
-                }</span>
+
+              <div className={styles.description__item}>
+                <span className={styles.description__text}>Кампус:</span>
+                <span className={styles.description__value}>{data.campus[object.campus]?.name}</span>
               </div>
-              <div className={
-                styles.description__item
-              }>
-                <span>Этаж:
-                </span>
-                <span>{
-                  object.floor
-                }</span>
+
+              <div className={styles.description__item}>
+                <span className={styles.description__text}>Этаж:</span>
+                <span className={styles.description__value}>{object.floor}</span>
               </div>
-              <div className={
-                styles.description__item
-              }>
-                <span>Комната:
-                </span>
-                <span>{
-                  object.room
-                }</span>
+
+              <div className={styles.description__item}>
+                <span className={styles.description__text}>Комната:</span>
+                <span className={styles.description__value}>{object.room}</span>
               </div>
-              <div className={
-                styles.description__item
-              }>
-                <span>Описаине:
-                </span>
-                <p>{
-                  object.description
-                }</p>
+
+              <div className="">
+                <span className={styles.description__text}>Описаине:</span>
+                <p className={styles.description__paragraph}>{object.description}</p>
               </div>
             </div>
 
