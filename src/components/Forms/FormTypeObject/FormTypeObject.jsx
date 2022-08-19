@@ -18,7 +18,7 @@ import { sendData } from '../../../utils/network';
 
 
 
-export const FormTypeObject = ({isOpen, setIsOpen, roles}) => {
+export const FormTypeObject = ({isOpen, setIsOpen, roles, updatePage}) => {
 
   const rulesObj = roles.reduce((newObj, item) => {
     newObj[item] = false;
@@ -70,7 +70,7 @@ export const FormTypeObject = ({isOpen, setIsOpen, roles}) => {
 
     roles.forEach((role, index) => {
       if(typeObject[role])
-        arrRolesIndex.push(index);
+        arrRolesIndex.push(index + 1);
     })
 
 
@@ -99,6 +99,7 @@ export const FormTypeObject = ({isOpen, setIsOpen, roles}) => {
         }, rulesObj))
         setIsOpen(false);
         setDisableButton(false);
+        updatePage()
       }, 1000)
 
     }

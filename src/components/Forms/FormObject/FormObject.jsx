@@ -42,8 +42,8 @@ export const FormObject = ({isOpen, setIsOpen, campus, types, updatePage}) => {
     setDisableButton(true);
     const res = await sendData(OBJECTS_URL, {
         ...objectBody,
-        type: Number(types.indexOf(objectBody.type)),
-        campus: Number(campus.indexOf(objectBody.campus)),
+        type: Number(types.indexOf(objectBody.type) + 1),
+        campus: Number(campus.indexOf(objectBody.campus) + 1),
         floor: Number(objectBody.floor),
         room: Number(objectBody.room),
         active: true

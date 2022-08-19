@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { sendData } from '../../../utils/network';
 import { ROLES_URL } from '../../../constants';
 
-export const FormRole = ({isOpen, setIsOpen, roles, updatePage}) => {
+export const FormRole = ({isOpen, setIsOpen, types, updatePage}) => {
 
   const [roleData, setRoleData] = useState({
     name: '',
@@ -103,12 +103,12 @@ export const FormRole = ({isOpen, setIsOpen, roles, updatePage}) => {
           }/>
         </div>
 
-        {/* <FormGroup> {
-          roles.map(type => (
+        <FormGroup> {
+          types.map(type => (
             <FormControlLabel control={<Checkbox/>}
               label={type}/>
           ))
-        } </FormGroup> */}
+        } </FormGroup>
 
         <Button variant="contained" disabled={disableButton || inputAreError()} onClick={handleCreateNewRole}>Создать новый роль</Button>
         {AlertData.show && <Alert severity={AlertData.type}>{AlertData.text}</Alert>}
