@@ -5,4 +5,8 @@ export const TYPE_OBJECT = ['Переговорка', 'Спортивный ин
 export const CAMPUS = ['Москва', 'Казань', 'Новосибирск'];
 
 // API
-export const BASE_URL = 'http://localhost/api/'
+export const BASE_URL = 'http://localhost:5000'
+export const ROLES_URL = BASE_URL + '/roles'
+export const TYPES_URL = BASE_URL + '/types'
+export const CAMPUS_URL = BASE_URL + '/campus'
+export const OBJECTS_URL = BASE_URL + '/objects'

@@ -1,14 +1,17 @@
 import {useState} from "react";
 
 import {Button, Autocomplete, TextField} from "@mui/material"
-import {CAMPUS, TYPE_OBJECT} from "../../constants";
 import {FormObject} from "../Forms/FormObject";
 
 import styles from "./Header.module.scss";
 import {FormRole} from "../Forms/FormRole";
 import {FormTypeObject} from "../Forms/FormTypeObject/FormTypeObject";
 
-export const Header = () => {
+export const Header = ({data, objects, updatePage, filterOption, setFilterOption}) => {
+  const campus = data.campus.map((item) => (item.name))
+  const types = data.types.map((item) => (item.name))
+  const roles = data.roles.map((item) => (item.name))
+
   const [openObjectForm, setOpenObjectForm] = useState(false)
   const [openRoleForm, setOpenRoleForm] = useState(false)
   const [openTypeObjectForm, setOpenTypeObjectForm] = useState(false)
@@ -17,6 +20,9 @@ export const Header = () => {
   const handleOpenRoleForm = () => setOpenRoleForm(true)
   const handleOpenTypeObjectForm = () => setOpenTypeObjectForm(true)
 
+  const changeFilters = (value, type) => {
+
+  }
 
   return (
     <>
@@ -37,40 +43,36 @@ export const Header = () => {
               variant="contained">Создать тип объекта</Button>
           </div>
 
-          <div className={
-            styles.header__filters
-          }>
-            <div className={
-              styles.filter__campus
-            }>
+          <div className={styles.header__filters}>
+            <div className={styles.filter__campus}>
               <Autocomplete disablePortal
-                options={CAMPUS}
-                sx={
-                  {width: 300}
-                }
-                renderInput={
-                  (params) => <TextField {...params} label="Выбирите кампус "/>}
-                />
+                options={campus}
+                sx={{width: 300}}
+                inputValue={filterOption.campus}
+                onInputChange={(event, newInputValue) => {
+                  setFilterOption(prev => ({...prev, campus: newInputValue}));
+                }}
+                renderInput={(params) => <TextField {...params} label="Выбирите кампус "/>}
+              />
             </div>
 
-          <div className={
-            styles.Buttonfilter__type
-          }>
+          <div className={styles.Buttonfilter__type}>
             <Autocomplete disablePortal
-              options={TYPE_OBJECT}
-              sx={
-                {width: 300}
-              }
-              renderInput={
-                (params) => <TextField {...params} label="Типы объекта "/>}
-              />
+              options={types}
+              sx={{width: 300}}
+              inputValue={filterOption.type}
+              onInputChange={(event, newInputValue) => {
+                setFilterOption(prev => ({...prev, type: newInputValue}));
+              }}
+              renderInput={(params) => <TextField {...params} label="Типы объекта "/>}
+            />
           </div>
       </div>
     </div>
   </header>
   <FormObject isOpen={openObjectForm}
-    setIsOpen={setOpenObjectForm}/>
-  <FormRole isOpen={openRoleForm}
+    setIsOpen={setOpenObjectForm} campus={campus} types={types} objects={objects} updatePage={updatePage}/>
+  <FormRole isOpen={openRoleForm} roles={roles} updatePage={updatePage}
     setIsOpen={setOpenRoleForm}/>
   <FormTypeObject isOpen={openTypeObjectForm}
     setIsOpen={setOpenTypeObjectForm}/>

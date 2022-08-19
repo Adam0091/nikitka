@@ -7,15 +7,11 @@ import {LocalizationProvider} from '@mui/x-date-pickers';
 
 import styles from './ObjectInfo.module.scss';
 
-export const ObjectInfo = ({
-  object = {},
-  isOpen,
-  setIsOpen
-}) => {
-  const [data, setData] = useState(new Date())
+export const ObjectInfo = ({object, data, isOpen, setIsOpen}) => {
+  const [date, setDate] = useState(new Date())
 
   const handleChange = (newValue) => {
-    setData(newValue);
+    setDate(newValue);
   };
 
   return (
@@ -39,71 +35,93 @@ export const ObjectInfo = ({
               }>
                 <span>Название объекта:
                 </span>
-                <span>String</span>
+                <span>{
+                  object.name
+                }</span>
               </div>
               <div className={
                 styles.description__item
               }>
                 <span>Тип объекта:
                 </span>
-                <span>String</span>
+                <span>{
+                  data.types[object.type]?.name
+                }</span>
               </div>
               <div className={
                 styles.description__item
               }>
                 <span>Кампус:
                 </span>
-                <span>String</span>
+                <span>{
+                  data.campus[object.campus]?.name
+                }</span>
               </div>
               <div className={
                 styles.description__item
               }>
                 <span>Этаж:
                 </span>
-                <span>String</span>
+                <span>{
+                  object.floor
+                }</span>
               </div>
               <div className={
                 styles.description__item
               }>
                 <span>Комната:
                 </span>
-                <span>String</span>
+                <span>{
+                  object.room
+                }</span>
               </div>
               <div className={
                 styles.description__item
               }>
                 <span>Описаине:
                 </span>
-                <p>String</p>
+                <p>{
+                  object.description
+                }</p>
               </div>
             </div>
 
           </div>
-          <div className={
-            styles.object_info__column
-          }>
+
+          {
+          object.image && (
             <div className={
-              styles.object_info__images
+              styles.object_info__column
             }>
-              <img src="" alt=""/>
+              <div className={
+                styles.object_info__images
+              }>
+                <img src={
+                    object.images
+                  }
+                  alt={
+                    object.name
+                  }/>
+              </div>
             </div>
-          </div>
-        </div>
+          )
+        } </div>
         <div className={
           styles.object_info__row
         }>
           <div className={
             styles.object_info__column
           }>
-            <div className={styles.object_info__data}>
+            <div className={
+              styles.object_info__data
+            }>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <Stack spacing={1}>
                   <DesktopDatePicker label="Выбирите дату брони" inputFormat="dd/MM/yyyy"
-                    value={data}
+                    value={date}
                     onChange={handleChange}
                     renderInput={
-                      (params) => <TextField {...params}/>}
-                    />
+                      (params) => <TextField {...params}/>}/>
                 </Stack>
             </LocalizationProvider>
             <div className="">

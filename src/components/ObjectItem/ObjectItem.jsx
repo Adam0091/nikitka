@@ -1,24 +1,26 @@
-import { useState } from 'react';
-import { ObjectInfo } from '../ObjectInfo';
+import {useState} from 'react';
+import {ObjectInfo} from '../ObjectInfo';
 import styles from './ObjectItem.module.scss';
 
+import image from '../../asssets/images/plug.png'
 
-export const ObjectItem = ({
-  object = {}
-}) => {
+
+export const ObjectItem = ({object, data}) => {
 
   const [openObjectInfo, setOpenObjectInfo] = useState(false)
 
   const handelOpenObjectInfo = () => setOpenObjectInfo(true)
+
   return (
     <>
-      <div onClick={handelOpenObjectInfo} className={
-        styles.object
+      <div onClick={handelOpenObjectInfo}
+        className={
+          styles.object
       }>
         <div className={
           styles.object__image
         }>
-          <img src="" alt=""/>
+          <img src={object.images || image} alt={object.name}/>
         </div>
 
         <div className={
@@ -26,13 +28,14 @@ export const ObjectItem = ({
         }>
           <h3 className={
             styles.description__name
-          }>Название</h3>
+          }>{object.name}</h3>
           <p className={
             styles.description__text
-          }>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora quidem exercitationem facere sapiente cum sit veritatis nesciunt. Earum itaque ullam maiores, accusamus commodi ut saepe aspernatur enim illum optio repellendus.</p>
+          }>{object.description}</p>
         </div>
       </div>
-      <ObjectInfo isOpen={openObjectInfo} setIsOpen={setOpenObjectInfo}/>
+      <ObjectInfo isOpen={openObjectInfo}
+        setIsOpen={setOpenObjectInfo} object={object} data={data}/>
     </>
   )
 }
