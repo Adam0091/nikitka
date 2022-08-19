@@ -1,9 +1,10 @@
 .objects_list {
   display: flex;
-  align-items: center;
   justify-content: space-between;
 
   row-gap: 30px;
   column-gap: 30px;
   flex-wrap: wrap;
+
+  margin: 30px 60px 90px 60px;
 }

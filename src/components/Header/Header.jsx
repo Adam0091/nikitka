@@ -70,12 +70,25 @@ export const Header = ({data, objects, updatePage, filterOption, setFilterOption
       </div>
     </div>
   </header>
-  <FormObject isOpen={openObjectForm}
-    setIsOpen={setOpenObjectForm} campus={campus} types={types} objects={objects} updatePage={updatePage}/>
-  <FormRole isOpen={openRoleForm} roles={roles} updatePage={updatePage}
-    setIsOpen={setOpenRoleForm}/>
-  <FormTypeObject isOpen={openTypeObjectForm}
-    setIsOpen={setOpenTypeObjectForm}/>
+  <FormObject 
+    isOpen={openObjectForm}
+    setIsOpen={setOpenObjectForm} 
+    campus={campus} 
+    types={types} 
+    objects={objects} 
+    updatePage={updatePage}
+  />
+  <FormRole 
+    isOpen={openRoleForm} 
+    roles={roles} 
+    updatePage={updatePage}
+    setIsOpen={setOpenRoleForm}
+  />
+  {roles.length !== 0 && (<FormTypeObject 
+    isOpen={openTypeObjectForm} 
+    setIsOpen={setOpenTypeObjectForm}
+    roles={roles}
+  />)}
 </>
   )
 }
