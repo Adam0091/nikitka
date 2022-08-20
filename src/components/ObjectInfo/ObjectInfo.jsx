@@ -15,18 +15,13 @@ export const ObjectInfo = ({object, data, isOpen, setIsOpen}) => {
   const [orders, setOrders] = useState([]);
 
   const handleChange = (newValue) => {
-    console.log(newValue)
     setDate(newValue);
   };
 
   const getResources = async () => {
-    const res = await getApiResource(ORDERS_URL, {
-      object_id: object.id
-    })
-
-    if(res.ok)
+    const res = await getApiResource(ORDERS_URL)
+    if(res.orders)
       setOrders(res.orders)
-      console.log(res.orders)
   }
 
   useEffect(() => {
@@ -49,12 +44,12 @@ export const ObjectInfo = ({object, data, isOpen, setIsOpen}) => {
 
               <div className={styles.description__item}>
                 <span className={styles.description__text}>Тип объекта:</span>
-                <span className={styles.description__value}>{data.types[object.type]?.name}</span>
+                <span className={styles.description__value}>{data.types[object.type - 1]?.name}</span>
               </div>
 
               <div className={styles.description__item}>
                 <span className={styles.description__text}>Кампус:</span>
-                <span className={styles.description__value}>{data.campus[object.campus]?.name}</span>
+                <span className={styles.description__value}>{data.campus[object.campus - 1]?.name}</span>
               </div>
 
               <div className={styles.description__item}>
@@ -113,7 +108,7 @@ export const ObjectInfo = ({object, data, isOpen, setIsOpen}) => {
                 </Stack>
             </LocalizationProvider>
             <div className="">
-              {orders.length === 0 ? "Список броней пуст" : <OrderList orders={orders}/>}
+              {<OrderList orders={orders}/>}
             </div>
           </div>
         </div>

@@ -7,6 +7,11 @@ import { ROLES_URL } from '../../../constants';
 
 export const FormRole = ({isOpen, setIsOpen, types, updatePage}) => {
 
+  const [typesObj, setTypesObj] = useState(types.reduce((newObj, item) => {
+    newObj[item] = false;
+    return newObj;
+  }, {}))
+
   const [roleData, setRoleData] = useState({
     name: '',
     description: '',
@@ -19,7 +24,6 @@ export const FormRole = ({isOpen, setIsOpen, types, updatePage}) => {
   })
 
   const [disableButton, setDisableButton] = useState(false)
-
 
   const inputAreError = () => {
     return !roleData.name
@@ -34,10 +38,23 @@ export const FormRole = ({isOpen, setIsOpen, types, updatePage}) => {
     }
   }
 
+  const handleChangeCheckbox = (event, type) => {
+    const value = event.target.checked;
+    setTypesObj(prev => ({...prev, [type]: value}))
+  }
+
   const handleCreateNewRole = async () => {
+    let arrTypesIndex = [];
+
+    types.forEach((role, index) => {
+      if(typesObj[role])
+      arrTypesIndex.push(index + 1);
+    })
+
     setDisableButton(true);
     const res = await sendData(ROLES_URL, {
-      ...roleData
+      ...roleData,
+      types: arrTypesIndex
     })
     
     if(res.ok){
@@ -105,8 +122,13 @@ export const FormRole = ({isOpen, setIsOpen, types, updatePage}) => {
 
         <FormGroup> {
           types.map(type => (
-            <FormControlLabel key={type} control={<Checkbox/>}
-              label={type}/>
+            <FormControlLabel 
+            checked={typesObj[type]}
+            onChange={(event)=> handleChangeCheckbox(event, type)}
+            key={type} 
+            label={type}
+            control={<Checkbox/>}
+          />
           ))
         } </FormGroup>
 

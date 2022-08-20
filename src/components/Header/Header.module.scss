@@ -10,9 +10,10 @@
   }
 
   &__buttons {
-    max-width: 50%;
+    max-width: 70%;
     display: flex;
     flex-wrap: wrap;
+    row-gap: 30px;
 
     justify-content: space-between;
   }

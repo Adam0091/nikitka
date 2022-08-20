@@ -6,7 +6,7 @@ export const getApiResource = async (url) => {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
         "Access-Control-Allow-Headers": "Content-Type"
-      }
+      },
     });
     if (!res.ok) {
       console.error("Could not fetch", res.status);

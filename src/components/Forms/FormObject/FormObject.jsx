@@ -57,7 +57,6 @@ export const FormObject = ({isOpen, setIsOpen, campus, types, roles, updatePage}
         campus: Number(campus.indexOf(objectBody.campus) + 1),
         floor: Number(objectBody.floor),
         room: Number(objectBody.room),
-        active: true,
         roles: arrRolesIndex
     })
     
@@ -137,7 +136,6 @@ export const FormObject = ({isOpen, setIsOpen, campus, types, roles, updatePage}
 
   const handleChangeCheckbox = (event, role) => {
     const value = event.target.checked;
-    console.log(value)
     setRulesObj(prev => ({...prev, [role]: value}))
   }
 

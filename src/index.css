@@ -16,8 +16,16 @@
 }
 
 .spinner__container {
-  width: 100%;
-  height: 50vh;
+  position: fixed;
+
+  background: rgba(0, 0, 0, 0.396);
+  top: 0;
+  left: 0;
+  right: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
 
   display: flex;
   align-items: center;

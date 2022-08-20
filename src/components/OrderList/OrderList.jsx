@@ -2,6 +2,8 @@
 import styles from './OrderList.module.scss'
 
 export const OrderList = ({orders}) => {
+  console.log(orders)
+
   return (
     <div className={styles.orders_list}>
       {orders.map((order) => (

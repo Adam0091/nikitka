@@ -28,9 +28,9 @@ export const HomePage = () => {
   const filter = () => {
     let filterData = objectsData;
     if (filterOption.campus !== "") 
-      filterData = filterData.filter(item => data.campus[item.campus]?.name === filterOption.campus)
+      filterData = filterData.filter(item => data.campus[item.campus-1]?.name === filterOption.campus)
     if (filterOption.type !== "") 
-      filterData = filterData.filter(item => data.types[item.type]?.name=== filterOption.type)
+      filterData = filterData.filter(item => data.types[item.type-1]?.name=== filterOption.type)
 
     setFilterObjectsData(filterData)
   }
