@@ -1,14 +1,8 @@
 .object_info {
   display: flex;
-  flex-direction: column;
   row-gap: 30px;
-
-  &__row {
-    display: flex;
-    column-gap: 50px;
-    justify-content: space-between;
-  }
-
+  column-gap: 50px;
+  
   &__column {
     width: 100%;
 

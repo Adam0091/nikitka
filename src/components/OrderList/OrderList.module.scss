@@ -1,0 +1,33 @@
+.orders_list {
+  height: 300px;
+  overflow-y: auto;
+  &__order {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    min-width: 300px;
+
+    border: 1px solid rgb(95, 95, 95);
+    border-radius: 5px;
+    padding: 10px;
+  }
+}
+
+.order {
+  &__value {
+    margin-left: 15px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+
+    column-gap: 5px;
+  }
+}

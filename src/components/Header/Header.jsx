@@ -75,18 +75,18 @@ export const Header = ({data, objects, updatePage, filterOption, setFilterOption
     objects={objects} 
     updatePage={updatePage}
   />
-  {types.length !== 0 && (<FormRole 
+<FormRole 
     isOpen={openRoleForm} 
     types={types} 
     updatePage={updatePage}
     setIsOpen={setOpenRoleForm}
-  />)}
-  {roles.length !== 0 && (<FormTypeObject 
+  />
+ <FormTypeObject 
     isOpen={openTypeObjectForm} 
     setIsOpen={setOpenTypeObjectForm}
     updatePage={updatePage}
     roles={roles}
-  />)}
+  />
 </>
   )
 }

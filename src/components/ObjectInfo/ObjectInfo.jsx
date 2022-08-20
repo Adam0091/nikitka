@@ -32,84 +32,64 @@ export const ObjectInfo = ({object, data, isOpen, setIsOpen}) => {
     <UiPopup open={isOpen}
       setOpen={setIsOpen}>
       <div className={styles.object_info}>
-        <div className={styles.object_info__row}>
-          <div className={styles.object_info__column}>
-            <div className={styles.object_info__description}>
-              <h2>Объект</h2>
+        
+        <div className={styles.object_info__column}>
+          <div className={styles.object_info__description}>
+            <h2>Объект</h2>
 
-              <div className={styles.description__item}>
-                <span className={styles.description__text}>Название объекта:</span>
-                <span className={styles.description__value}>{object.name}</span>
-              </div>
-
-              <div className={styles.description__item}>
-                <span className={styles.description__text}>Тип объекта:</span>
-                <span className={styles.description__value}>{data.types[object.type - 1]?.name}</span>
-              </div>
-
-              <div className={styles.description__item}>
-                <span className={styles.description__text}>Кампус:</span>
-                <span className={styles.description__value}>{data.campus[object.campus - 1]?.name}</span>
-              </div>
-
-              <div className={styles.description__item}>
-                <span className={styles.description__text}>Этаж:</span>
-                <span className={styles.description__value}>{object.floor}</span>
-              </div>
-
-              <div className={styles.description__item}>
-                <span className={styles.description__text}>Комната:</span>
-                <span className={styles.description__value}>{object.room}</span>
-              </div>
-
-              <div className="">
-                <span className={styles.description__text}>Описаине:</span>
-                <p className={styles.description__paragraph}>{object.description}</p>
-              </div>
+            <div className={styles.description__item}>
+              <span className={styles.description__text}>Название объекта:</span>
+              <span className={styles.description__value}>{object.name}</span>
             </div>
 
+            <div className={styles.description__item}>
+              <span className={styles.description__text}>Тип объекта:</span>
+              <span className={styles.description__value}>{data.types[object.type - 1]?.name}</span>
+            </div>
+
+            <div className={styles.description__item}>
+              <span className={styles.description__text}>Кампус:</span>
+              <span className={styles.description__value}>{data.campus[object.campus - 1]?.name}</span>
+            </div>
+
+            <div className={styles.description__item}>
+              <span className={styles.description__text}>Этаж:</span>
+              <span className={styles.description__value}>{object.floor}</span>
+            </div>
+
+            <div className={styles.description__item}>
+              <span className={styles.description__text}>Комната:</span>
+              <span className={styles.description__value}>{object.room}</span>
+            </div>
+
+            <div className="">
+              <span className={styles.description__text}>Описаине:</span>
+              <p className={styles.description__paragraph}>{object.description}</p>
+            </div>
           </div>
 
-          {
-          object.image && (
-            <div className={
-              styles.object_info__column
-            }>
-              <div className={
-                styles.object_info__images
-              }>
-                <img src={
-                    object.images
-                  }
-                  alt={
-                    object.name
-                  }/>
-              </div>
-            </div>
-          )
-        } </div>
+        </div>
+
         <div className={
-          styles.object_info__row
+          styles.object_info__column
         }>
           <div className={
-            styles.object_info__column
+            styles.object_info__data
           }>
-            <div className={
-              styles.object_info__data
-            }>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <Stack spacing={1}>
-                  <DesktopDatePicker label="Выбирите дату брони" inputFormat="dd/MM/yyyy"
-                    value={date}
-                    onChange={handleChange}
-                    renderInput={
-                      (params) => <TextField {...params}/>}
-                  />
-                </Stack>
-            </LocalizationProvider>
-            <div className="">
-              {<OrderList orders={orders}/>}
-            </div>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <Stack spacing={1}>
+                <DesktopDatePicker label="Выбирите дату брони" inputFormat="dd/MM/yyyy"
+                  value={date}
+                  onChange={handleChange}
+                  renderInput={
+                    (params) => <TextField {...params}/>}
+                />
+              </Stack>
+          </LocalizationProvider>
+
+          
+          <div>
+              <OrderList date={date} orders={orders.filter(order => order.object === object.id)}/>
           </div>
         </div>
       </div>
