@@ -9,7 +9,7 @@ import spinner from '../../asssets/images/spinner.svg'
 export const HomePage = () => {
   const [data, setData] = useState({types: [], campus: [], roles: []})
 
-  const [objectsData, setObjectsData] = useState([])
+  const [objectsData, setObjectsData] = useState(null)
   const [filterObjectsData, setFilterObjectsData] = useState([])
 
   const [filterOption, setFilterOption] = useState({campus: '', type: ''})
@@ -19,7 +19,6 @@ export const HomePage = () => {
     const {campus} = await getApiResource(CAMPUS_URL)
     const {roles} = await getApiResource(ROLES_URL)
     const {objects} = await getApiResource(OBJECTS_URL)
-
     setObjectsData(objects);
     setFilterObjectsData(objects)
     setData({types: types, campus: campus, roles: roles})
@@ -55,7 +54,7 @@ export const HomePage = () => {
         filterOption={filterOption}
         setFilterOption={setFilterOption}/>
         {
-          objectsData && objectsData.length !== 0 ? (<ObjectsList objects={filterObjectsData}data={data}/>)
+          objectsData ? (<ObjectsList objects={filterObjectsData}data={data}/>)
           : (
               <div className="spinner__container">
                 <img src={spinner} alt="spinner" />
